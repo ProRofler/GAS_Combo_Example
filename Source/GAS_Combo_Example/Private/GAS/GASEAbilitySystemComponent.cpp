@@ -1,5 +1,45 @@
 // GAS Example project
 
-
 #include "GAS/GASEAbilitySystemComponent.h"
+#include "DataAssets/GASEAbilitiesListDataAsset.h"
 
+void UGASEAbilitySystemComponent::BeginPlay()
+{
+    Super::BeginPlay();
+
+    InitAbilities();
+}
+
+void UGASEAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag InputTag)
+{
+    if (!InputTag.IsValid()) return;
+
+    for (FGameplayAbilitySpec &AbilitySpec : GetActivatableAbilities())
+    {
+        if (AbilitySpec.DynamicAbilityTags.HasTagExact(InputTag))
+        {
+            AbilitySpecInputPressed(AbilitySpec);
+            if (!AbilitySpec.IsActive())
+            {
+                TryActivateAbility(AbilitySpec.Handle);
+            }
+        }
+    }
+}
+
+void UGASEAbilitySystemComponent::InitAbilities()
+{
+
+    InitAbilityActorInfo(GetOwner(), GetOwner());
+
+    if (GrantedAbilitiesDataAsset)
+    {
+        if (!GrantedAbilitiesDataAsset->GrantedAbilities.IsEmpty())
+        {
+            for (auto &Ability : GrantedAbilitiesDataAsset->GrantedAbilities)
+            {
+                GiveAbility(FGameplayAbilitySpec(Ability, 1, 0, GetOwner()));
+            }
+        }
+    }
+}

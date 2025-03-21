@@ -18,11 +18,11 @@ void UGASEAbilitySystemComponent::InitAbilities()
 
     InitAbilityActorInfo(GetOwner(), GetOwner());
 
-    if (auto grantedAbilities = Cast<AGASEBaseCharacter>(GetOwner())->GetGrantedAbilitiesDataAsset())
+    if (auto grantedAbilitiesDA = Cast<AGASEBaseCharacter>(GetOwner())->GetGrantedAbilitiesDataAsset())
     {
-        if (!grantedAbilities->GrantedAbilities.IsEmpty())
+        if (!grantedAbilitiesDA->GrantedAbilities.IsEmpty())
         {
-            for (auto &Ability : grantedAbilities->GrantedAbilities)
+            for (auto &Ability : grantedAbilitiesDA->GrantedAbilities)
             {
                 GiveAbility(FGameplayAbilitySpec(Ability, 1, 0, GetOwner()));
             }

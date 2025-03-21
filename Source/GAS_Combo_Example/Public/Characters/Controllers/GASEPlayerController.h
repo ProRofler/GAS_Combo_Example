@@ -5,9 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 
-#include "GASE_PlayerController.generated.h"
+#include "GASEPlayerController.generated.h"
 
-class AGASE_BaseCharacter;
+class AGASEBaseCharacter;
 class UInputMappingContext;
 class UInputAction;
 
@@ -25,7 +25,7 @@ struct FEnhancedInputData
 };
 
 UCLASS()
-class GAS_COMBO_EXAMPLE_API AGASE_PlayerController : public APlayerController
+class GAS_COMBO_EXAMPLE_API AGASEPlayerController : public APlayerController
 {
     GENERATED_BODY()
 
@@ -39,7 +39,7 @@ class GAS_COMBO_EXAMPLE_API AGASE_PlayerController : public APlayerController
     FEnhancedInputData InputData;
 
   private:
-    TWeakObjectPtr<AGASE_BaseCharacter> GASEPlayerCharacter;
+    TWeakObjectPtr<AGASEBaseCharacter> GASEPlayerCharacter;
 
     void ControllerSetup();
 };

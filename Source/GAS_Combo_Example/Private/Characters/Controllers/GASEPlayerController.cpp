@@ -1,34 +1,34 @@
 // GAS Example project
 
-#include "Characters/Controllers/GASE_PlayerController.h"
-#include "Characters/GASE_BaseCharacter.h"
+#include "Characters/Controllers/GASEPlayerController.h"
+#include "Characters/GASEBaseCharacter.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
-void AGASE_PlayerController::BeginPlay()
+void AGASEPlayerController::BeginPlay()
 {
     Super::BeginPlay();
 
     ControllerSetup();
 }
 
-void AGASE_PlayerController::OnPossess(APawn *aPawn)
+void AGASEPlayerController::OnPossess(APawn *aPawn)
 {
 
     Super::OnPossess(aPawn);
 
     if (UEnhancedInputComponent *Input = CastChecked<UEnhancedInputComponent>(InputComponent))
     {
-        GASEPlayerCharacter = CastChecked<AGASE_BaseCharacter>(GetCharacter());
+        GASEPlayerCharacter = CastChecked<AGASEBaseCharacter>(GetCharacter());
 
         Input->BindAction(InputData.MoveAction, ETriggerEvent::Triggered, GASEPlayerCharacter.Get(),
-                          &AGASE_BaseCharacter::MoveAction);
+                          &AGASEBaseCharacter::MoveAction);
         Input->BindAction(InputData.LookAction, ETriggerEvent::Triggered, GASEPlayerCharacter.Get(),
-                          &AGASE_BaseCharacter::LookAction);
+                          &AGASEBaseCharacter::LookAction);
     }
 }
 
-void AGASE_PlayerController::ControllerSetup()
+void AGASEPlayerController::ControllerSetup()
 {
 
     if (APlayerController *PC = Cast<APlayerController>(this))

@@ -5,19 +5,19 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 
-#include "GASE_BaseCharacter.generated.h"
+#include "GASEBaseCharacter.generated.h"
 
-class AGASE_PlayerController;
+class AGASEPlayerController;
 
 UCLASS()
-class GAS_COMBO_EXAMPLE_API AGASE_BaseCharacter : public ACharacter
+class GAS_COMBO_EXAMPLE_API AGASEBaseCharacter : public ACharacter
 {
     GENERATED_BODY()
 
   public:
-    friend AGASE_PlayerController;
+    friend AGASEPlayerController;
 
-    AGASE_BaseCharacter();
+    AGASEBaseCharacter();
 
     virtual void Tick(float DeltaTime) override;
 

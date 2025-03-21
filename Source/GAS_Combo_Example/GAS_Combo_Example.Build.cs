@@ -10,9 +10,9 @@ public class GAS_Combo_Example : ModuleRules
 
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
 
-        PrivateDependencyModuleNames.AddRange(new string[] { });
+        PrivateDependencyModuleNames.AddRange(new string[] { "GameplayTasks", "GameplayTags", "GameplayAbilities" });
 
-        PublicIncludePaths.AddRange(new string[] { "GAS_Combo_Example/Public/Characters" });
+        PublicIncludePaths.AddRange(new string[] { "GAS_Combo_Example/Public/Characters", "GAS_Combo_Example/Public/GAS" });
 
         // Uncomment if you are using Slate UI
         // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

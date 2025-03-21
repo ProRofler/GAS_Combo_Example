@@ -2,10 +2,24 @@
 
 #include "Characters/GASEBaseCharacter.h"
 #include "EnhancedInputSubsystems.h"
+#include "GAS/GASEAbilitySystemComponent.h"
+#include "GAS/GASEMainAttributeSet.h"
 
-AGASEBaseCharacter::AGASEBaseCharacter() { PrimaryActorTick.bCanEverTick = true; }
+AGASEBaseCharacter::AGASEBaseCharacter()
+{
+    PrimaryActorTick.bCanEverTick = true;
+    AbilitySystemComponent = CreateDefaultSubobject<UGASEAbilitySystemComponent>("Ability system component");
+}
 
-void AGASEBaseCharacter::BeginPlay() { Super::BeginPlay(); }
+void AGASEBaseCharacter::BeginPlay()
+{
+    Super::BeginPlay();
+
+    if (IsValid(AbilitySystemComponent))
+    {
+        AttributeSetMain = CastChecked<UGASEMainAttributeSet>(AbilitySystemComponent->GetSet<UGASEMainAttributeSet>());
+    }
+}
 
 void AGASEBaseCharacter::MoveAction(const FInputActionValue &Value)
 {
@@ -21,4 +35,9 @@ void AGASEBaseCharacter::Tick(float DeltaTime) { Super::Tick(DeltaTime); }
 void AGASEBaseCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
     Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+UAbilitySystemComponent *AGASEBaseCharacter::GetAbilitySystemComponent() const
+{
+    return Cast<UAbilitySystemComponent>(AbilitySystemComponent.Get());
 }

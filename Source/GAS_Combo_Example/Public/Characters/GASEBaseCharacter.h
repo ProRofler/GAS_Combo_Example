@@ -2,15 +2,18 @@
 
 #pragma once
 
+#include "AbilitySystemInterface.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 
 #include "GASEBaseCharacter.generated.h"
 
 class AGASEPlayerController;
+class UGASEAbilitySystemComponent;
+class UGASEMainAttributeSet;
 
 UCLASS()
-class GAS_COMBO_EXAMPLE_API AGASEBaseCharacter : public ACharacter
+class GAS_COMBO_EXAMPLE_API AGASEBaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
     GENERATED_BODY()
 
@@ -23,8 +26,15 @@ class GAS_COMBO_EXAMPLE_API AGASEBaseCharacter : public ACharacter
 
     virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 
+    virtual UAbilitySystemComponent *GetAbilitySystemComponent() const override;
+
+
   protected:
     virtual void BeginPlay() override;
+
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "GASE Character|GAS", meta = (AllowPrivateAccess = "true"))
+    TObjectPtr<UGASEAbilitySystemComponent> AbilitySystemComponent;
+    TObjectPtr<const UGASEMainAttributeSet> AttributeSetMain;
 
   private:
     UFUNCTION()
@@ -32,4 +42,3 @@ class GAS_COMBO_EXAMPLE_API AGASEBaseCharacter : public ACharacter
     UFUNCTION()
     void LookAction(const FInputActionValue &Value);
 };
-

@@ -18,6 +18,8 @@ void AGASEBaseCharacter::BeginPlay()
     if (IsValid(AbilitySystemComponent))
     {
         AttributeSetMain = CastChecked<UGASEMainAttributeSet>(AbilitySystemComponent->GetSet<UGASEMainAttributeSet>());
+
+        AbilitySystemComponent->InitAbilities();
     }
 }
 

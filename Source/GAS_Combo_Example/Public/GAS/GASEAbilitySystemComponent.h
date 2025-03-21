@@ -7,8 +7,6 @@
 
 #include "GASEAbilitySystemComponent.generated.h"
 
-class UGASEAbilitiesListDataAsset;
-
 UCLASS()
 class GAS_COMBO_EXAMPLE_API UGASEAbilitySystemComponent : public UAbilitySystemComponent
 {
@@ -18,12 +16,8 @@ class GAS_COMBO_EXAMPLE_API UGASEAbilitySystemComponent : public UAbilitySystemC
     UFUNCTION(BlueprintCallable, Category = "GASE Input")
     void AbilityInputTagPressed(const FGameplayTag InputTag);
 
-  private:
     void InitAbilities();
 
   protected:
     virtual void BeginPlay() override;
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GASE Abilities")
-    TObjectPtr<UGASEAbilitiesListDataAsset> GrantedAbilitiesDataAsset;
 };

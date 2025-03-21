@@ -4,6 +4,7 @@
 
 #include "AbilitySystemInterface.h"
 #include "CoreMinimal.h"
+#include "DataAssets/GASEAbilitiesListDataAsset.h"
 #include "GameFramework/Character.h"
 
 #include "GASEBaseCharacter.generated.h"
@@ -28,13 +29,19 @@ class GAS_COMBO_EXAMPLE_API AGASEBaseCharacter : public ACharacter, public IAbil
 
     virtual UAbilitySystemComponent *GetAbilitySystemComponent() const override;
 
+    UFUNCTION(BlueprintPure, Category = "GASE Abilities")
+    UGASEAbilitiesListDataAsset *GetGrantedAbilitiesDataAsset() { return GrantedAbilitiesDataAsset; }
 
   protected:
     virtual void BeginPlay() override;
 
-    UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "GASE Character|GAS", meta = (AllowPrivateAccess = "true"))
+    UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "GASE Character|GAS",
+              meta = (AllowPrivateAccess = "true"))
     TObjectPtr<UGASEAbilitySystemComponent> AbilitySystemComponent;
     TObjectPtr<const UGASEMainAttributeSet> AttributeSetMain;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GASE Abilities")
+    TObjectPtr<UGASEAbilitiesListDataAsset> GrantedAbilitiesDataAsset;
 
   private:
     UFUNCTION()

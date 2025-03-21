@@ -1,14 +1,10 @@
 // GAS Example project
 
 #include "GAS/GASEAbilitySystemComponent.h"
+#include "Characters/GASEBaseCharacter.h"
 #include "DataAssets/GASEAbilitiesListDataAsset.h"
 
-void UGASEAbilitySystemComponent::BeginPlay()
-{
-    Super::BeginPlay();
-
-    InitAbilities();
-}
+void UGASEAbilitySystemComponent::BeginPlay() { Super::BeginPlay(); }
 
 void UGASEAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag InputTag)
 {
@@ -22,11 +18,11 @@ void UGASEAbilitySystemComponent::InitAbilities()
 
     InitAbilityActorInfo(GetOwner(), GetOwner());
 
-    if (GrantedAbilitiesDataAsset)
+    if (auto grantedAbilities = Cast<AGASEBaseCharacter>(GetOwner())->GetGrantedAbilitiesDataAsset())
     {
-        if (!GrantedAbilitiesDataAsset->GrantedAbilities.IsEmpty())
+        if (!grantedAbilities->GrantedAbilities.IsEmpty())
         {
-            for (auto &Ability : GrantedAbilitiesDataAsset->GrantedAbilities)
+            for (auto &Ability : grantedAbilities->GrantedAbilities)
             {
                 GiveAbility(FGameplayAbilitySpec(Ability, 1, 0, GetOwner()));
             }

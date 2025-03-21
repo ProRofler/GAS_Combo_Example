@@ -9,13 +9,13 @@ void AGASE_BaseCharacter::BeginPlay() { Super::BeginPlay(); }
 
 void AGASE_BaseCharacter::MoveAction(const FInputActionValue &Value)
 {
-    //UE_LOG(LogTemp, Display, TEXT("Trying to move"));
+    UE_LOG(LogTemp, Display, TEXT("Trying to move"));
 }
 
 void AGASE_BaseCharacter::LookAction(const FInputActionValue &Value)
 {
 
-    //UE_LOG(LogTemp, Display, TEXT("Trying to look"));
+    UE_LOG(LogTemp, Display, TEXT("Trying to look"));
 }
 void AGASE_BaseCharacter::Tick(float DeltaTime) { Super::Tick(DeltaTime); }
 

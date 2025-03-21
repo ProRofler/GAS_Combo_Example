@@ -14,17 +14,7 @@ void UGASEAbilitySystemComponent::AbilityInputTagPressed(const FGameplayTag Inpu
 {
     if (!InputTag.IsValid()) return;
 
-    for (FGameplayAbilitySpec &AbilitySpec : GetActivatableAbilities())
-    {
-        if (AbilitySpec.DynamicAbilityTags.HasTagExact(InputTag))
-        {
-            AbilitySpecInputPressed(AbilitySpec);
-            if (!AbilitySpec.IsActive())
-            {
-                TryActivateAbility(AbilitySpec.Handle);
-            }
-        }
-    }
+    TryActivateAbilitiesByTag(InputTag.GetSingleTagContainer());
 }
 
 void UGASEAbilitySystemComponent::InitAbilities()

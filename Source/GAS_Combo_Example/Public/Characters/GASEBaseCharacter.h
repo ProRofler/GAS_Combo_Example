@@ -13,6 +13,8 @@ class AGASEPlayerController;
 class UGASEAbilitySystemComponent;
 class UGASEMainAttributeSet;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
+
 UCLASS()
 class GAS_COMBO_EXAMPLE_API AGASEBaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
@@ -31,6 +33,9 @@ class GAS_COMBO_EXAMPLE_API AGASEBaseCharacter : public ACharacter, public IAbil
 
     UFUNCTION(BlueprintPure, Category = "GASE Abilities")
     UGASEAbilitiesListDataAsset *GetGrantedAbilitiesDataAsset() { return GrantedAbilitiesDataAsset; }
+
+    UPROPERTY(BlueprintAssignable, Category = "GASE Events")
+    FOnHealthChangedSignature OnHealthChanged;
 
   protected:
     virtual void BeginPlay() override;

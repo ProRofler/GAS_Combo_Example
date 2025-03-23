@@ -23,6 +23,10 @@ class GAS_COMBO_EXAMPLE_API UGASEMainAttributeSet : public UAttributeSet
     ATTRIBUTE_ACCESSORS(UGASEMainAttributeSet, Health);
     ATTRIBUTE_ACCESSORS(UGASEMainAttributeSet, MaxHealth);
 
+    virtual void PreAttributeChange(const FGameplayAttribute &Attribute, float &NewValue) override;
+    virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData &Data) override;
+
+
   protected:
     UPROPERTY(BlueprintReadOnly, Category = "Main attributes")
     FGameplayAttributeData Health;

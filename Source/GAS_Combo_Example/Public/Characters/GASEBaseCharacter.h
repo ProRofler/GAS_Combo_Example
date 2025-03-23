@@ -6,6 +6,7 @@
 #include "CoreMinimal.h"
 #include "DataAssets/GASEAbilitiesListDataAsset.h"
 #include "GameFramework/Character.h"
+#include "GameplayTagContainer.h"
 
 #include "GASEBaseCharacter.generated.h"
 
@@ -13,7 +14,8 @@ class AGASEPlayerController;
 class UGASEAbilitySystemComponent;
 class UGASEMainAttributeSet;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnHealthChangedSignature, float, NewHealth, FGameplayTagContainer,
+                                             EffectTags);
 
 UCLASS()
 class GAS_COMBO_EXAMPLE_API AGASEBaseCharacter : public ACharacter, public IAbilitySystemInterface

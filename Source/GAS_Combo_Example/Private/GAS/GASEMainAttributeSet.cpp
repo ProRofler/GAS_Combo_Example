@@ -18,14 +18,17 @@ void UGASEMainAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCa
 {
     Super::PostGameplayEffectExecute(Data);
 
-    
+    const FGameplayEffectSpec &Spec = Data.EffectSpec;
+
+    FGameplayTagContainer EffectTags;
+    Spec.GetAllAssetTags(EffectTags);
 
     if (Data.EvaluatedData.Attribute == GetHealthAttribute())
     {
         SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
         if (const auto GASECharacter = Cast<AGASEBaseCharacter>(Data.Target.GetAvatarActor()))
         {
-            GASECharacter->OnHealthChanged.Broadcast(GetHealth());
+            GASECharacter->OnHealthChanged.Broadcast(GetHealth(), EffectTags);
         }
     }
 }
